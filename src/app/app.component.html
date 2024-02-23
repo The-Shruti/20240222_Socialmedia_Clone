@@ -1,0 +1,186 @@
+<!-- Navigation Bar -->
+<nav>
+    <div class="nav-left">
+        <a href="Index.html">
+            <img src="https://i.postimg.cc/Y9nZymQq/logo2.png" class="logo">
+        </a>
+        <ul>
+            <li><img src="https://i.postimg.cc/Fs3m1Djy/notification.png"></li>
+            <li><img src="https://i.postimg.cc/YqGKZ8nc/inbox.png"></li>
+            <li><img src="https://i.postimg.cc/xCzpgFjg/video.png"></li>
+        </ul>
+    </div>
+    <div class="nav-right">
+        <div class="search-box">
+            <img src="https://i.postimg.cc/SKtHgM6Q/search.png">
+            <input type="text" placeholder="Search">
+        </div>
+        <div class="nav-user-icon online" onclick="settingsMenuToggle()">
+            <img src="https://i.postimg.cc/cHg22LhR/profile-pic.png">
+        </div>
+    </div>
+    <!-- Settings Menu -->
+    <div class="settings-menu">
+        <div id="dark-btn">
+            <span></span>
+        </div>
+        <div class="settings-menu-inner">
+            <!-- User Profile -->
+            <div class="user-profile">
+                <img src="https://i.postimg.cc/cHg22LhR/profile-pic.png">
+                <div>
+                    <p>John Nicholson</p>
+                    <a href="profile.html">See your profile</a>
+                </div>
+            </div>
+            <hr>
+            <!-- Feedback -->
+            <div class="user-profile">
+                <img src="https://i.postimg.cc/hv3nx52s/feedback.png">
+                <div>
+                    <p>Give Feedback</p>
+                    <a href="#">Help us to improve the new design</a>
+                </div>
+            </div>
+            <hr>
+            <!-- Settings Links -->
+            <div class="settings-links">
+                <img src="https://i.postimg.cc/QCcPNYRV/setting.png" class="settings-icon">
+                <a href="#">Settings & Privacy <img src="https://i.postimg.cc/RF1dBMWr/arrow.png" width="10px"></a>
+            </div>
+            <div class="settings-links">
+                <img src="https://i.postimg.cc/C5tydfK6/help.png" class="settings-icon">
+                <a href="#">Help & Support<img src="https://i.postimg.cc/RF1dBMWr/arrow.png" width="10px"></a>
+            </div>
+            <div class="settings-links">
+                <img src="https://i.postimg.cc/5yt1XVSj/display.png" class="settings-icon">
+                <a href="#">Display & Accessibility <img src="https://i.postimg.cc/RF1dBMWr/arrow.png" width="10px"></a>
+            </div>
+            <div class="settings-links">
+                <img src="https://i.postimg.cc/PJC9GrMb/logout.png" class="settings-icon">
+                <a href="#">Logout <img src="https://i.postimg.cc/RF1dBMWr/arrow.png" width="10px"></a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- Main Content -->
+<div class="container">
+    <!-- Left Sidebar -->
+    <div class="left-sidebar">
+        <div class="imp-links">
+            <!-- Important Links -->
+            <a href="#"><img src="https://i.postimg.cc/RCj4MjnC/news.png">Latest News</a>
+            <a href="#"><img src="https://i.postimg.cc/MpBwMtV0/friends.png">Friends</a>
+            <a href="#"><img src="https://i.postimg.cc/44FRWj1b/group.png">Group</a>
+            <a href="#"><img src="https://i.postimg.cc/0jh39RtT/marketplace.png">Marketplace</a>
+            <a href="#"><img src="https://i.postimg.cc/VsXHCTVk/watch.png">Watch</a>
+            <a href="#">See More</a>
+        </div>
+        <!-- Shortcut Links -->
+        <div class="shortcut-link">
+            <p>Your Shortcuts</p>
+            <a href="#" *ngFor="let shortcut of shortcuts"> 
+                <img [src]="shortcut.img" />
+                {{ shortcut.title}}
+            </a>
+        </div>
+    </div>
+
+    <!-- Main Sidebar -->
+    <div class="main-content">
+        <!-- Story Gallery -->
+        <div class="story-gallery">
+            <div class="story" *ngFor="let member of stories; let i = index" [ngClass]="'story' + (i+1)">
+                <img [src]="member.imgSrc">
+                <p>{{ member.story }}</p>
+            </div>
+        </div>
+        <!-- Write Post Container -->
+        <div class="write-post-container">
+            <div class="user-profile">
+                <img [src]="userProfile.imgSrc">
+                <div>
+                    <p>{{ userProfile.userName }}</p>
+                    <small>Public <i class="fas fa-caret-down"></i></small>
+                </div>
+            </div>
+            <div class="post-input-container">
+                <textarea rows="3" [placeholder]="postInputPlaceholder"></textarea>
+                <div class="add-post-links">
+                    <a href="#" *ngFor="let link of postInputLinks">
+                        <img [src]="link.iconSrc">{{ link.text }}
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Post Container -->
+        <div *ngFor="let post of posts" class="post-container">
+            <div class="post-row">
+                <div class="user-profile">
+                    <img src="https://i.postimg.cc/cHg22LhR/profile-pic.png">
+                    <div>
+                        <p>{{ post.userName }}</p>
+                        <span>{{ post.dateTime }}</span>
+                    </div>
+                </div>
+                <a href="#"><i class="fas fa-ellipsis-v"></i></a>
+            </div>
+            <p class="post-text">{{ post.text }} <a href="#" *ngFor="let hashtag of post.hashtags">{{ hashtag }}</a></p>
+            <img [src]="post.imgSrc" class="post-img">
+            <div class="post-row">
+                <div class="activity-icons">
+                    <div><img src="https://i.postimg.cc/pLKNXrMq/like-blue.png">{{ post.likes }}</div>
+                    <div><img src="https://i.postimg.cc/rmjMymWv/comments.png">{{ post.comments }}</div>
+                    <div><img src="https://i.postimg.cc/T2bBchpG/share.png">{{ post.shares }}</div>
+                </div>
+                <div class="post-porfile-icon">
+                    <img src="https://i.postimg.cc/cHg22LhR/profile-pic.png"><i class="fas fa-caret-down"></i>
+                </div>
+            </div>
+        </div>
+        <!-- Load More Button -->
+        <button type="button" class="load-more-btn">Load More</button>
+    </div>
+    
+    <!-- Right Sidebar -->
+    <div class="right-sidebar">
+        <div class="sidebar-title">
+            <h4>Events</h4>
+            <a href="#">See All</a>
+        </div>
+        <div *ngFor="let event of events" class="event">
+            <div class="left-event">
+                <h3>{{ event.day }}</h3>
+                <span>{{ event.month }}</span>
+            </div>
+            <div class="right-event">
+                <h4>{{ event.title }}</h4>
+                <p><i class="fas fa-map-marker-alt"></i> {{ event.location }}</p>
+                <a href="{{ event.moreInfo }}">More Info</a>
+            </div>
+        </div>
+        <div class="sidebar-title">
+            <h4>Advertisement</h4>
+            <a href="#">close</a>
+        </div>
+        <img src="https://i.postimg.cc/CLXYx9BL/advertisement.png" class="siderbar-ads">
+        <div class="sidebar-title">
+            <h4>Conversation</h4>
+            <a href="#">Hide Chat</a>
+        </div>
+        <div class="online-list" *ngFor="let member of onlineMembers">
+            <div class="online">
+                <img [src]="member.imgSrc">
+            </div>
+            <p>{{ member.firstName }} {{ member.lastName }}</p>
+            <p *ngFor="let status of [member.status]"></p>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+    <p>SocialMedia Clone </p>
+</div>
